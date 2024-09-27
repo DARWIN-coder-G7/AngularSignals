@@ -1,0 +1,45 @@
+<div class="d-flex align-items-center justify-content-center">
+    <div class="bg-primary">HEY I AM THE PRIMARY</div>
+    <div class="bg-secondary text-primary">SECONDARY BG with PRIMARY TEXT</div>
+    <div class="bg-danger text-success">DANGER BG with SUCCESS TEXT</div>
+</div>
+
+<div class="container">
+    <h2>Please add as many hobbies as you want below.</h2>
+    <form [formGroup]="hobbiesForm">
+        <div class="input-row" *ngFor="let hobby of $any(hobbiesForm.get('hobbiesArray')).controls; index as idx; last as isLast">
+            
+            <div class="d-flex align-items-center justify-content-center text-secondary">
+                <div>
+                    <label for="qty-{{idx}}">Quantity:</label>
+                    <input id="qty-{{idx}}" type="text" [formControl]="hobby.controls['qty']">
+                </div>
+                <div>
+                    <label for="radio-AM-{{idx}}">AM</label>
+                    <input id="radio-AM-{{idx}}" type="radio" [value]="'AM'" [formControl]="hobby.get('radio')">
+                </div>
+                <div>
+                    <label for="radio-PM-{{idx}}">PM</label>
+                    <input id="radio-PM-{{idx}}" type="radio" [value]="'PM'" [formControl]="hobby.get('radio')">
+                </div>
+                <div>
+                    <label for="radio-ON_GOING-{{idx}}">ON_GOING</label>
+                    <input id="radio-ON_GOING-{{idx}}" type="radio" [value]="'ON_GOING'" [formControl]="hobby.get('radio')">
+                </div>
+                <div>
+                    <label for="radio-BED-{{idx}}">BED</label>
+                    <input id="radio-BED-{{idx}}" type="radio" [value]="'BED'" [formControl]="hobby.get('radio')">
+                </div>
+            </div>
+            <button class="btn btn-danger" *ngIf="hobbiesArray.length > 1" (click)="removeInputControl(idx)">
+                Remove
+            </button>
+            <button class="btn btn-primary" *ngIf="hobbiesArray.length < 4 && isLast" (click)="addInputControl()">
+                ADD
+            </button>
+        </div>
+
+        <h2 class="margin-top">Form Value</h2>
+        <div>{{hobbiesForm.value | json}}</div>
+    </form>
+</div>

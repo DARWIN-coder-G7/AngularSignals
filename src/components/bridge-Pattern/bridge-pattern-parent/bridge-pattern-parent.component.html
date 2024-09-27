@@ -1,0 +1,35 @@
+<mat-grid-list cols="4" rowHeight="100px">
+    @for (tile of gridSignal(); track tile ; let i = $index) {
+      <mat-grid-tile
+        [colspan]="tile.cols"
+        [rowspan]="tile.rows"
+        >
+        <div>
+            <h4 [style.background]="tile.color">{{tile.text}}</h4>
+            <div class="card">
+                <ng-container *ngTemplateOutlet="tile.template" ></ng-container>
+            </div>
+        </div>
+        
+       
+    </mat-grid-tile>
+    }
+  </mat-grid-list>
+  <mat-divider></mat-divider>
+  <mat-select [formControl]="selectFormControl" required>
+    @for (animal of animals; track animal) {
+      <mat-option [value]="animal.sound">{{animal.name}}</mat-option>
+    }
+  </mat-select>
+  <button mat-button (click)="changeLayout()" > Click HERE FOR MOBILE LAYOUT</button>
+
+  <mat-divider></mat-divider>
+
+
+  
+<app-bridge-wrapper>
+<app-bridge-type-one></app-bridge-type-one>
+</app-bridge-wrapper>
+<app-bridge-wrapper>
+<app-bridge-type-two></app-bridge-type-two>
+</app-bridge-wrapper>
